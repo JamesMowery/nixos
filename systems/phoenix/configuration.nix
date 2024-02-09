@@ -1,0 +1,278 @@
+# Edit this configuration file to define what should be installed on
+# your system. Help is available in the configuration.nix(5) man page, on
+# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+
+{ config, lib, pkgs, inputs, systemSettings, userSettings, ... }:
+
+{
+  imports =
+    [
+      ./hardware-configuration.nix
+      ../../modules/nixos/boot/systemd-boot.nix
+      ../../modules/nixos/wm/x11.nix
+      (./. + "../../../modules/nixos/wm" + ("/" + userSettings.display) + ".nix")
+      (./. + "../../../modules/nixos/wm" + ("/" + userSettings.wm) + ".nix")
+      inputs.home-manager.nixosModules.default
+    ];
+
+  # Enable Flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+ 
+  # Enable Unfree
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.cudaSupport = true;
+
+  # Enable Electron
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
+
+  ############################################################
+  # BOOT
+  ############################################################
+  #boot.loader.systemd-boot.enable = true;
+  #boot.loader.efi.canTouchEfiVariables = true;
+  #boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  ############################################################
+  # FILESYSTEM
+  ############################################################
+  fileSystems."/boot/efi" =
+    { device = "/dev/disk/by-uuid/E475-AC97";
+      fsType = "vfat";
+    };
+
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
+      fsType = "btrfs";
+      options = [ "subvol=@" "compress=zstd" "space_cache=v2" "noatime" ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
+      fsType = "btrfs";
+      options = [ "subvol=@home"  "compress=zstd" "space_cache=v2" "noatime" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
+      fsType = "btrfs";
+      options = [ "subvol=@nix" "compress=zstd" "space_cache=v2" "noatime" ];
+    };
+
+  fileSystems."/mnt/games" =
+    { device = "/dev/disk/by-uuid/6b09080b-4ff2-4655-878b-feb9a5b8e5be";
+      fsType = "btrfs";
+      options = [ "subvol=@games" "compress=zstd" "space_cache=v2" "noatime" ];
+    };
+  
+  fileSystems."/mnt/data" =
+    { device = "/dev/disk/by-uuid/6b09080b-4ff2-4655-878b-feb9a5b8e5be";
+      fsType = "btrfs";
+      options = [ "subvol=@data" "compress=zstd" "space_cache=v2" "noatime" ];
+    };
+  
+  fileSystems."/mnt/backup" =
+    { device = "/dev/disk/by-uuid/6b09080b-4ff2-4655-878b-feb9a5b8e5be";
+      fsType = "btrfs";
+      options = [ "subvol=@backup" "compress=zstd" "space_cache=v2" "noatime" ];
+    };
+  
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "weekly";
+    fileSystems = [ "/" ];
+  };
+
+  boot.binfmt.registrations.appimage = {
+    wrapInterpreterInShell = false;
+    interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+    recognitionType = "magic";
+    offset = 0;
+    mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
+    magicOrExtension = ''\x7fELF....AI\x02'';
+  };
+  
+  ############################################################
+  # NETWORK
+  ############################################################
+  networking.hostName = "phoenix"; 	   # Define your hostname.
+  networking.networkmanager.enable = true; # Use NetworkManager 
+
+  
+  ############################################################
+  # TIMEZONE/LOCALE
+  ############################################################
+  # Set your time zone.
+  time.timeZone = "America/Phoenix";
+
+  # Select internationalisation properties.
+  # i18n.defaultLocale = "en_US.UTF-8";
+  # console = {
+  #   font = "Lat2-Terminus16";
+  #   keyMap = "us";
+  #   useXkbConfig = true; # use xkb.options in tty.
+  # };
+
+  ############################################################
+  # WINDOW SERVER
+  ############################################################
+  # Enable the X11 windowing system.
+  #services.xserver.enable = true;
+
+  #services.xserver.displayManager.gdm.enable = true;
+  #services.xserver.desktopManager.gnome.enable = true;
+  
+  # Configure keymap in X11
+  #services.xserver.xkb.layout = "us";
+  # services.xserver.xkb.options = "eurosign:e,caps:escape";
+
+  ############################################################
+  # GPU/GRAPHICS
+  ############################################################
+  # Enable OpenGL
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  # Load nvidia driver for Xorg and Wayland
+  services.xserver.videoDrivers = ["nvidia"];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    powerManagement.enable = false;
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    powerManagement.finegrained = false;
+    # Currently alpha-quality/buggy, so false is currently the recommended setting.
+    open = false;
+    # Enable the Nvidia settings menu,
+    nvidiaSettings = true;
+    # Handle Screen Tearing
+    forceFullCompositionPipeline = true;
+    # Driver version.
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  ############################################################
+  # BLUETOOTH
+  ############################################################
+  #hardware.bluetooth.enable = true;
+  #hardware.bluetooth.powerOnBoot = true;
+
+
+  ############################################################
+  # SOUND
+  ############################################################
+  # Enable sound.
+  #sound.enable = true;
+  #security.rtkit.enable = true;
+  #services.pipewire = {
+  #  enable = true;
+  #  alsa.enable = true;
+  #  alsa.support32Bit = true;
+  #  pulse.enable = true;
+  #  jack.enable = true;
+  #};
+  #hardware.pulseaudio.enable = false;
+
+  ############################################################
+  # USER
+  ############################################################
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.james = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "input" ]; # Enable ‘sudo’ for the user.
+  };
+
+  ############################################################
+  # HOME-MANAGER
+  ############################################################
+  home-manager = {
+    #pass inputs to home-manager modules
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "james" = import ./home.nix;
+    };
+    useGlobalPkgs = true;
+  };
+
+  ############################################################
+  # SYSTEM PACAKGES
+  ############################################################
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    gnome.gnome-tweaks
+    fish
+    zsh
+    ollama
+    #(import pkgs { config.cudaSupport = true; config.allowUnfree = true; }).ollama
+  ];
+
+
+  environment.shells = with pkgs; [ fish zsh bash ];
+  users.defaultUserShell = pkgs.fish;
+  programs.fish.enable = true;
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    gamescopeSession.enable = true;
+  }; 
+
+  ############################################################
+  # OTHER
+  ############################################################
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
+
+  ############################################################
+  # SERVICES
+  ############################################################
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  # system.copySystemConfiguration = true;
+
+  # This option defines the first version of NixOS you have installed on this particular machine,
+  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
+  #
+  # Most users should NEVER change this value after the initial install, for any reason,
+  # even if you've upgraded your system to a new NixOS release.
+  #
+  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
+  # so changing it will NOT upgrade your system.
+  #
+  # This value being lower than the current NixOS release does NOT mean your system is
+  # out of date, out of support, or vulnerable.
+  #
+  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
+  # and migrated your data accordingly.
+  #
+  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+  system.stateVersion = "23.11"; # Did you read the comment?
+
+}
+

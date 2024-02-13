@@ -18,7 +18,7 @@
   # Enable Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;	# Enable Unfree
-  nixpkgs.config.cudaSupport = true;	# Enable CUDA
+  #nixpkgs.config.cudaSupport = true;	# Enable CUDA
 
   # Enable Electron
   nixpkgs.config.permittedInsecurePackages = [
@@ -112,6 +112,8 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [mangohud];
+    extraPackages32 = with pkgs; [mangohud];
   };
 
   # Load nvidia driver for Xorg and Wayland
@@ -184,6 +186,7 @@
     fish
     zsh
     ollama
+    binutils
     #(import pkgs { config.cudaSupport = true; config.allowUnfree = true; }).ollama
   ];
 

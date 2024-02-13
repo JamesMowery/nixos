@@ -1,75 +1,84 @@
 { config, pkgs, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "james";
   home.homeDirectory = "/home/james";
+  home.stateVersion = "23.11"; # Value you should not be updated
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
-
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
+  # Install packages into home environment
   home.packages = with pkgs; [
+    # General
+    alacritty 
     wget
-    git
-    lazygit
-    neovim
-    neofetch
     unzip
     killall
     ripgrep
     fzf
+    gparted
+    tldr
+    nvd
+    yazi
+    #fish
+    #starship
+    #ollama
+    #cudatoolkit
+
+    # Web
+    firefox
+
+    # Utility
+    nethogs
+
+    # Development
+    git
+    lazygit
+    neovim
+    neofetch
+    tree-sitter
+    vscodium
+
+    # Multimedia
     yt-dlp
     ffmpeg
-    tree-sitter
     btop
     mpv
+    handbrake
+    stremio
 
+    # Gaming
     lutris
     heroic
     bottles
     protonup-qt
+    openttd-jgrpp
+    mangohud
+    #openmw
+    starsector
     
+    # Creative
+    obs-studio
     gimp
     inkscape
-    vscodium
-    gparted
     obsidian
-    
-    #openttd
-    openttd-jgrpp
-    
-    firefox
-    alacritty 
-    tldr
-    
     fluidsynth
+    freecad
+    kicad
+
+    # Social
     discord
-    #fish
-    #starship
-    nvd
-    
-    #ollama
-    cudatoolkit
+    signal-desktop
+    telegram-desktop
     
     # Wayland / Hyprland
-    kitty
+    hyprpaper
     dolphin
+    kitty
     wofi
     waybar
-    hyprpaper
+    mako
     
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
+    # Finance
+    tradingview
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -116,7 +125,7 @@
   #  /etc/profiles/per-user/james/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.

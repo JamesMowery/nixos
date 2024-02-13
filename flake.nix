@@ -31,7 +31,7 @@
         #display = "wayland";
         browser = "firefox";
         terminal = "alacritty";
-        editor = "neovim";
+        editor = "nvim";
       };
 
       system = "x86_64-linux";

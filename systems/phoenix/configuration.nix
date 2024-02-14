@@ -88,8 +88,9 @@
   # NETWORK
   ############################################################
   networking.hostName = "phoenix"; 	   # Define your hostname.
-  networking.networkmanager.enable = true; # Use NetworkManager 
-  
+  networking.networkmanager.enable = true; # Use networkmanager
+  networking.firewall.allowedTCPPorts = [ 6742 ];
+
   ############################################################
   # TIMEZONE/LOCALE
   ############################################################
@@ -187,6 +188,11 @@
     zsh
     ollama
     binutils
+    i2c-tools
+    libgcc
+    gcc
+    libclang
+    clang
     #(import pkgs { config.cudaSupport = true; config.allowUnfree = true; }).ollama
   ];
 
@@ -216,6 +222,7 @@
   # SERVICES
   ############################################################
   # List services that you want to enable:
+  #services.hardware.openrgb.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

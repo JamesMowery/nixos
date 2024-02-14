@@ -33,10 +33,10 @@
     # Development
     git
     lazygit
-    neovim
     neofetch
     tree-sitter
     vscodium
+    nodejs
 
     # Multimedia
     yt-dlp
@@ -81,19 +81,24 @@
     # Finance
     tradingview
 
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
+    # Overrides Example
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
+    # Shell Script Example
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  programs.neovim = {
+    enable = true;
+    #extraConfig = ''
+    #  set number relativenumber
+    #  '';
+    plugins = [
+      pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+    ];
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

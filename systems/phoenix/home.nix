@@ -28,6 +28,7 @@
 
     # Utility
     nethogs
+    openrgb
 
     # Development
     git

@@ -12,6 +12,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  boot.kernelParams = [ "acpi_enforce_resources=lax" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";

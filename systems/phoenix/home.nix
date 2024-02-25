@@ -25,10 +25,21 @@
 
     # Web
     firefox
+    floorp
 
     # Utility
     nethogs
     openrgb
+    nh
+    flameshot
+    hyprshot
+
+    # Productivity
+    libreoffice-qt
+    hunspell
+    hunspellDicts.en_US-large
+    qalculate-qt
+    thunderbird
 
     # Development
     git
@@ -45,6 +56,7 @@
     mpv
     handbrake
     stremio
+    freetube
 
     # Gaming
     lutris
@@ -55,6 +67,10 @@
     mangohud
     #openmw
     starsector
+    #wine
+    wineWowPackages.stable
+    #wineWowPackages.waylandFull
+    winetricks
     
     # Creative
     obs-studio
@@ -69,7 +85,7 @@
     discord
     signal-desktop
     telegram-desktop
-    
+
     # Wayland / Hyprland
     hyprpaper
     dolphin
@@ -77,7 +93,7 @@
     wofi
     waybar
     mako
-    
+
     # Finance
     tradingview
 
@@ -96,6 +112,7 @@
     #  set number relativenumber
     #  '';
     plugins = [
+      #vimPlugins.nvim-treesitter
       pkgs.vimPlugins.nvim-treesitter.withAllGrammars
     ];
   };
@@ -133,6 +150,8 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+
+  services.blueman-applet.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

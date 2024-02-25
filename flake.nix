@@ -26,10 +26,10 @@
     name = "James Mowery";
     email = "jmowery@gmail.com";
     dotfilesDir = "~/.dotfiles";
-    wm = "gnome";
-    #wm = "hyprland";
-    display = "x11";
-    #display = "wayland";
+    #wm = "gnome";
+    #display = "x11";
+    wm = "hyprland";
+    display = "wayland";
     browser = "firefox";
     terminal = "alacritty";
     editor = "nvim";

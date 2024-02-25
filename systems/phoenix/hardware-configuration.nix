@@ -12,7 +12,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" "i2c-dev" "i2c-piix4" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [ "acpi_enforce_resources=lax" ];
+  boot.kernelParams = [ "pcie_port_pm=off" "pcie_aspm.policy=performance" "acpi_enforce_resources=lax" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";

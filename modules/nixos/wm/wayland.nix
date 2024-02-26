@@ -1,9 +1,11 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./pipewire.nix
-              ./fonts.nix
-            ];
+  imports = [
+    ./pipewire.nix
+    ./fonts.nix
+    ./portals.nix
+  ];
 
   environment.systemPackages = [ pkgs.wayland pkgs.waydroid ];
 

@@ -9,5 +9,7 @@
       gnome.enable = true;
     };
   };
-  #programs = {};
+  programs = {
+    gnome.gnome-tweaks;
+  };
 }

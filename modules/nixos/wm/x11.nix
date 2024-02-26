@@ -1,9 +1,11 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./pipewire.nix
-              ./fonts.nix
-            ];
+  imports = [
+    ./pipewire.nix
+    ./fonts.nix
+    ./portals.nix
+  ];
 
   services.xserver = {
     enable = true;

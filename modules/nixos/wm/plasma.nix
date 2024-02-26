@@ -16,4 +16,15 @@
     #breeze-icons.enable = true;
     dconf.enable = true;
   };
+  environment.systemPackages = [
+    pkgs.gsettings-desktop-schemas
+  ];
+  #xdg.portal = {
+  #  enable = true;
+  #  extraPortals = with pkgs; [
+  #    xdg-desktop-portal-kde
+  #    xdg-desktop-portal-gtk
+  #    #xdg-desktop-portal-wlr
+  #  ];
+  #};
 }

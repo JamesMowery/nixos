@@ -10,5 +10,10 @@
     platformTheme = "gnome";
     style = "adwaita-dark";
   };
-  programs.dconf.enable = true;
+  programs = {
+    #breeze-qt5.enable = true;
+    #breeze-gtk.enable = true;
+    #breeze-icons.enable = true;
+    dconf.enable = true;
+  };
 }

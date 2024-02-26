@@ -67,7 +67,6 @@
     mangohud
     #openmw
     starsector
-    #wine
     wineWowPackages.stable
     #wineWowPackages.waylandFull
     winetricks
@@ -97,6 +96,8 @@
     # Finance
     tradingview
 
+    # Theme
+
     # Overrides Example
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
@@ -116,6 +117,78 @@
       pkgs.vimPlugins.nvim-treesitter.withAllGrammars
     ];
   };
+
+  #gtk = {
+  #  enable = true;
+  #  theme = {
+  #    name = "Juno";
+  #    package = pkgs.juno-theme;
+  #  };
+  #  iconTheme = {
+  #    name = "Papirus-Dark"; 
+  #    package = pkgs.papirus-icon-theme;
+  #  };
+  #  cursorTheme = {
+  #    name = "breeze_cursors";
+  #  };
+  #  gtk3.extraConfig = {
+  #    Settings = ''
+  #      gtk-application-prefer-dark-theme=1
+  #    '';
+  #  };
+  #  gtk4.extraConfig = {
+  #    Settings = ''
+  #      gtk-application-prefer-dark-theme=1
+  #    '';
+  #  };
+  #};
+
+  #Gtk 
+  #gtk = {
+  #  enable = true;
+  #  font.name = "TeX Gyre Adventor 10";
+  #  theme = {
+  #    name = "Juno";
+  #    package = pkgs.juno-theme;
+  #  };
+  #  iconTheme = {
+  #    name = "Papirus-Dark";
+  #    package = pkgs.papirus-icon-theme;
+  #  };
+  #  cursorTheme = {
+  #    name = "Bibata-Modern-Classic";
+  #    package = pkgs.bibata-cursors;
+  #  };
+  #  
+  #  #gtk2.extraConfig = {};
+
+  #  gtk3.extraConfig = { 
+  #    color-scheme = "prefer-dark";
+  #    Settings = ''
+  #      gtk-application-prefer-dark-theme=1
+  #      gtk-cursor-theme-name=Bibata-Modern-Classic
+  #      '';
+  #  };
+
+  #  gtk4.extraConfig = {
+  #    color-scheme = "prefer-dark";
+  #    Settings = ''
+  #      gtk-application-prefer-dark-theme=1
+  #      gtk-cursor-theme-name=Bibata-Modern-Classic
+  #      '';
+  #  };
+
+  #};
+  #gnome outside gnome
+  #dconf = {
+  #  enable = true;
+  #  settings = {
+  #    "org/gnome/desktop/interface" = {
+  #      color-scheme = "prefer-dark";
+  #      theme = "Juno";
+  #    };
+  #  };
+  #};
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -151,6 +224,7 @@
     EDITOR = "nvim";
   };
 
+  # Enable bluetooth icon (requires blueman service in system config)
   services.blueman-applet.enable = true;
 
   # Let Home Manager install and manage itself.

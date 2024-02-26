@@ -9,7 +9,8 @@
     [
       ./hardware-configuration.nix
       ../../modules/nixos/boot/systemd-boot.nix
-      ../../modules/nixos/wm/x11.nix
+      #../../modules/nixos/wm/plasma.nix
+      #../../modules/nixos/wm/x11.nix
       (./. + "../../../modules/nixos/wm" + ("/" + userSettings.display) + ".nix")
       (./. + "../../../modules/nixos/wm" + ("/" + userSettings.wm) + ".nix")
       inputs.home-manager.nixosModules.default
@@ -74,7 +75,6 @@
     interval = "weekly";
     fileSystems = [ "/" ];
   };
-
 
   boot.binfmt.registrations.appimage = {
     wrapInterpreterInShell = false;
@@ -185,7 +185,6 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
-    gnome.gnome-tweaks
     fish
     zsh
     ollama
@@ -196,6 +195,8 @@
     libclang
     clang
     #(import pkgs { config.cudaSupport = true; config.allowUnfree = true; }).ollama
+
+    gnome.gnome-tweaks
   ];
 
   environment.shells = with pkgs; [ fish zsh bash ];

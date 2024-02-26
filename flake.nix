@@ -27,9 +27,10 @@
     email = "jmowery@gmail.com";
     dotfilesDir = "~/.dotfiles";
     #wm = "gnome";
-    #display = "x11";
-    wm = "hyprland";
-    display = "wayland";
+    wm = "plasma";
+    display = "x11";
+    #wm = "hyprland";
+    #display = "wayland";
     browser = "firefox";
     terminal = "alacritty";
     editor = "nvim";

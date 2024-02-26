@@ -8,5 +8,6 @@
     desktopManager = {
       gnome.enable = true;
     };
-  }; 
+  };
+  #programs = {};
 }

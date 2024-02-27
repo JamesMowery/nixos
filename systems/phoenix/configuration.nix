@@ -16,12 +16,12 @@
       inputs.home-manager.nixosModules.default
     ];
 
+  nixpkgs.config.allowUnfree = true;	# Enable Unfree
+  
   ############################################################
   # FLAKES
   ############################################################
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true;	# Enable Unfree
-  #nixpkgs.config.cudaSupport = true;	# Enable CUDA
 
   ############################################################
   # ELECTRON FIX
@@ -92,6 +92,7 @@
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = ["nvidia"];
 
+  # Nvidia Options
   hardware.nvidia = {
     modesetting.enable = true;
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
@@ -108,6 +109,9 @@
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
+  # Enable CUDA
+  #nixpkgs.config.cudaSupport = true;	# Enable CUDA
+
   ############################################################
   # BLUETOOTH
   ############################################################
@@ -118,7 +122,6 @@
   ############################################################
   # SOUND
   ############################################################
-  # Enable sound.
   #sound.enable = true;
   #security.rtkit.enable = true;
   #services.pipewire = {
@@ -151,7 +154,7 @@
   };
 
   ############################################################
-  # SYSTEM PACAKGES
+  # SYSTEM PACKAGES
   ############################################################
   environment.systemPackages = with pkgs; [
     vim
@@ -167,17 +170,20 @@
     clang
     #(import pkgs { config.cudaSupport = true; config.allowUnfree = true; }).ollama
   ];
-
-  environment.shells = with pkgs; [ fish zsh bash ];
-  users.defaultUserShell = pkgs.fish;
-  programs.fish.enable = true;
-
+  
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     gamescopeSession.enable = true;
   }; 
+
+  ############################################################
+  # DEFAULTS
+  ############################################################
+  programs.fish.enable = true;
+  users.defaultUserShell = pkgs.fish;
+  environment.shells = with pkgs; [ fish zsh bash ];
 
   ############################################################
   # OTHER

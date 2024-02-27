@@ -93,6 +93,21 @@
   networking.firewall.allowedTCPPorts = [ 6742 ];
 
   ############################################################
+  # VIRTUALIZATION
+  ############################################################
+  virtualisation.docker = {
+  #  enable = true; 
+    storageDriver = "btrfs";
+    #setSocketVariable = true;
+  };
+  
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+    #storageDriver = "btrfs";
+  };
+
+  ############################################################
   # TIMEZONE/LOCALE
   ############################################################
   # Set your time zone.
@@ -164,7 +179,7 @@
   ############################################################
   users.users.james = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "input" "docker" "vboxusers" ]; # Enable ‘sudo’ for the user.
   };
 
   ############################################################
@@ -195,7 +210,6 @@
     libclang
     clang
     #(import pkgs { config.cudaSupport = true; config.allowUnfree = true; }).ollama
-
   ];
 
   environment.shells = with pkgs; [ fish zsh bash ];

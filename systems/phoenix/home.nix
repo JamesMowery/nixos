@@ -33,6 +33,8 @@
     nh
     flameshot
     hyprshot
+    distrobox
+    #podman
 
     # Productivity
     libreoffice-qt

@@ -17,25 +17,49 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
       fsType = "btrfs";
-      options = [ "subvol=@" ];
+      options = [ "subvol=@" "compress=zstd" "space_cache=v2" "noatime" ];
     };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
       fsType = "btrfs";
-      options = [ "subvol=@home" ];
+      options = [ "subvol=@home"  "compress=zstd" "space_cache=v2" "noatime" ];
     };
 
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
       fsType = "btrfs";
-      options = [ "subvol=@nix" ];
+      options = [ "subvol=@nix" "compress=zstd" "space_cache=v2" "noatime" ];
     };
 
   fileSystems."/boot/efi" =
     { device = "/dev/disk/by-uuid/E475-AC97";
       fsType = "vfat";
     };
+
+  fileSystems."/mnt/games" =
+    { device = "/dev/disk/by-uuid/6b09080b-4ff2-4655-878b-feb9a5b8e5be";
+      fsType = "btrfs";
+      options = [ "subvol=@games" "compress=zstd" "space_cache=v2" "noatime" ];
+    };
+  
+  fileSystems."/mnt/data" =
+    { device = "/dev/disk/by-uuid/6b09080b-4ff2-4655-878b-feb9a5b8e5be";
+      fsType = "btrfs";
+      options = [ "subvol=@data" "compress=zstd" "space_cache=v2" "noatime" ];
+    };
+  
+  fileSystems."/mnt/backup" =
+    { device = "/dev/disk/by-uuid/6b09080b-4ff2-4655-878b-feb9a5b8e5be";
+      fsType = "btrfs";
+      options = [ "subvol=@backup" "compress=zstd" "space_cache=v2" "noatime" ];
+    };
+  
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "weekly";
+    fileSystems = [ "/" ];
+  };
 
   swapDevices = [ ];
 

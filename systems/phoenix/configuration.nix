@@ -16,66 +16,23 @@
       inputs.home-manager.nixosModules.default
     ];
 
-  # Enable Flakes
+  ############################################################
+  # FLAKES
+  ############################################################
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;	# Enable Unfree
   #nixpkgs.config.cudaSupport = true;	# Enable CUDA
 
-  # Enable Electron
+  ############################################################
+  # ELECTRON FIX
+  ############################################################
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
 
   ############################################################
-  # FILESYSTEM
+  # APP IMAGES
   ############################################################
-  fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/E475-AC97";
-      fsType = "vfat";
-    };
-
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
-      fsType = "btrfs";
-      options = [ "subvol=@" "compress=zstd" "space_cache=v2" "noatime" ];
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
-      fsType = "btrfs";
-      options = [ "subvol=@home"  "compress=zstd" "space_cache=v2" "noatime" ];
-    };
-
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
-      fsType = "btrfs";
-      options = [ "subvol=@nix" "compress=zstd" "space_cache=v2" "noatime" ];
-    };
-
-  fileSystems."/mnt/games" =
-    { device = "/dev/disk/by-uuid/6b09080b-4ff2-4655-878b-feb9a5b8e5be";
-      fsType = "btrfs";
-      options = [ "subvol=@games" "compress=zstd" "space_cache=v2" "noatime" ];
-    };
-  
-  fileSystems."/mnt/data" =
-    { device = "/dev/disk/by-uuid/6b09080b-4ff2-4655-878b-feb9a5b8e5be";
-      fsType = "btrfs";
-      options = [ "subvol=@data" "compress=zstd" "space_cache=v2" "noatime" ];
-    };
-  
-  fileSystems."/mnt/backup" =
-    { device = "/dev/disk/by-uuid/6b09080b-4ff2-4655-878b-feb9a5b8e5be";
-      fsType = "btrfs";
-      options = [ "subvol=@backup" "compress=zstd" "space_cache=v2" "noatime" ];
-    };
-  
-  services.btrfs.autoScrub = {
-    enable = true;
-    interval = "weekly";
-    fileSystems = [ "/" ];
-  };
-
   boot.binfmt.registrations.appimage = {
     wrapInterpreterInShell = false;
     interpreter = "${pkgs.appimage-run}/bin/appimage-run";
@@ -110,7 +67,6 @@
   ############################################################
   # TIMEZONE/LOCALE
   ############################################################
-  # Set your time zone.
   time.timeZone = "America/Phoenix";
 
   # Select internationalisation properties.
@@ -243,10 +199,8 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  ############################################################
+  # VERSION
+  ############################################################
   system.stateVersion = "23.11"; # Did you read the comment?
 }

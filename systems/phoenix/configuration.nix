@@ -47,16 +47,15 @@
   # VIRTUALIZATION
   ############################################################
   virtualisation.docker = {
-  #  enable = true; 
+    enable = true; 
     storageDriver = "btrfs";
-    #setSocketVariable = true;
   };
   
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-    #storageDriver = "btrfs";
-  };
+  #virtualisation.docker.rootless = {
+  #  enable = true;
+  #  setSocketVariable = true;
+  #  #storageDriver = "btrfs";
+  #};
 
   ############################################################
   # TIMEZONE/LOCALE

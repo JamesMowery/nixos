@@ -35,6 +35,8 @@
     hyprshot
     distrobox
     #podman
+    #jdk17
+    openjdk11
 
     # Productivity
     libreoffice-qt

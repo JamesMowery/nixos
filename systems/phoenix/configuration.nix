@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, inputs, systemSettings, userSettings, ... }:
 
 {
@@ -9,15 +5,13 @@
     [
       ./hardware-configuration.nix
       ../../modules/nixos/boot/systemd-boot.nix
-      #../../modules/nixos/wm/plasma.nix
-      #../../modules/nixos/wm/x11.nix
       (./. + "../../../modules/nixos/wm" + ("/" + userSettings.display) + ".nix")
       (./. + "../../../modules/nixos/wm" + ("/" + userSettings.wm) + ".nix")
       inputs.home-manager.nixosModules.default
     ];
 
   nixpkgs.config.allowUnfree = true;	# Enable Unfree
-  
+
   ############################################################
   # FLAKES
   ############################################################

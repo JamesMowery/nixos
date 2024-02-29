@@ -14,8 +14,6 @@
     pam.services.login.enableGnomeKeyring = true;
   };
 
-  services.gnome.gnome-keyring.enable = true;
-
   programs = {
     hyprland = {
       enable = true;
@@ -33,4 +31,7 @@
     gnome.gnome-calculator.enable = true;
     gnome.nautilus.enable = true;             #gnome file manager
   };
+
+  services.gnome.gnome-keyring.enable = true;
+  services.blueman.enable = true;
 }

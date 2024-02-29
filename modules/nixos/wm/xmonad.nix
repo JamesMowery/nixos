@@ -17,4 +17,6 @@
       defaultSession = "none+xmonad";
     };
   };
+
+  services.blueman.enable = true;
 }

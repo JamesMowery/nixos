@@ -50,4 +50,6 @@
       systemctl --user start tray.target
     ''
   };
+
+  services.blueman.enable = true;
 }

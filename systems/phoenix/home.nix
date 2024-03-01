@@ -19,7 +19,7 @@
     nvd
     yazi
     #fish
-    #starship
+    starship
     #ollama
     #cudatoolkit
 

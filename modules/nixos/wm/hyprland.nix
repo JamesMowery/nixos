@@ -22,15 +22,14 @@
       };
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
-
-    # Gnome Utilities
-    gnome.file-roller.enable = true;
-    gnome-text-editor.enable = true;
-    gnome.file-roller.enable = true;
-    gnome.gnome-font-viewer.enable = true;
-    gnome.gnome-calculator.enable = true;
-    gnome.nautilus.enable = true;             #gnome file manager
   };
+
+  # Gnome Utilities
+  #pkgs.gnome-text-editor.enable = true;
+  #pkgs.gnome.file-roller.enable = true;
+  #pkgs.gnome.gnome-font-viewer.enable = true;
+  #pkgs.gnome.gnome-calculator.enable = true;
+  #pkgs.gnome.nautilus.enable = true;             #gnome file manager
 
   services.gnome.gnome-keyring.enable = true;
   services.blueman.enable = true;

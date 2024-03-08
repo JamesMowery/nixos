@@ -193,6 +193,7 @@
   ############################################################
   # List services that you want to enable:
   #services.hardware.openrgb.enable = true;
+  services.flatpak.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

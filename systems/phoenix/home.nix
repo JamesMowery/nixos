@@ -36,7 +36,8 @@
     distrobox
     #podman
     #jdk17
-    openjdk11
+    #openjdk11
+    zulu11
 
     # Productivity
     libreoffice-qt

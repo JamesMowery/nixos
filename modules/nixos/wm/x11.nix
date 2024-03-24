@@ -4,7 +4,7 @@
   imports = [
     ./pipewire.nix
     ./fonts.nix
-    ./portals.nix
+    #./portals.nix
   ];
 
   services.xserver = {

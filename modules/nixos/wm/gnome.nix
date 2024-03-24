@@ -9,7 +9,7 @@
       gnome.enable = true;
     };
   };
-  programs = {
-    gnome.gnome-tweaks;
-  };
+  environment.systemPackages = [
+    pkgs.gnome.gnome-tweaks
+  ];
 }

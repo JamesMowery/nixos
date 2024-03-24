@@ -26,14 +26,14 @@
     name = "James Mowery";
     email = "jmowery@gmail.com";
     dotfilesDir = "~/.dotfiles";
-    #wm = "gnome";
-    wm = "plasma";
-    display = "x11";
-    #wm = "hyprland";
-    #display = "wayland";
     browser = "firefox";
     terminal = "alacritty";
     editor = "nvim";
+    wm = "gnome";
+    #wm = "plasma";
+    display = "x11";
+    #wm = "hyprland";
+    #display = "wayland";
   };
 
   system = "x86_64-linux";

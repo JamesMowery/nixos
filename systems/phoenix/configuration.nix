@@ -131,6 +131,9 @@
   users.users.james = {
     isNormalUser = true;
     extraGroups = [ "wheel" "input" "docker" "vboxusers" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [
+      #flatpak
+    ];
   };
 
   ############################################################

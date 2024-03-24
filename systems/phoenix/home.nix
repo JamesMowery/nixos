@@ -3,7 +3,7 @@
 {
   home.username = "james";
   home.homeDirectory = "/home/james";
-  home.stateVersion = "23.11"; # Value you should not be updated
+  home.stateVersion = "23.11"; # Value should not be updated
 
   # Install packages into home environment
   home.packages = with pkgs; [
@@ -45,6 +45,7 @@
     hunspellDicts.en_US-large
     qalculate-qt
     thunderbird
+    logseq
 
     # Development
     git
@@ -70,6 +71,7 @@
     protonup-qt
     openttd-jgrpp
     mangohud
+    goverlay
     #openmw
     starsector
     wineWowPackages.stable
@@ -91,12 +93,12 @@
     telegram-desktop
 
     # Wayland / Hyprland
-    hyprpaper
-    dolphin
-    kitty
-    wofi
-    waybar
-    mako
+    #hyprpaper
+    #dolphin
+    #kitty
+    #wofi
+    #waybar
+    #mako
 
     # Finance
     tradingview
@@ -149,51 +151,51 @@
   #};
 
   #Gtk 
-  #gtk = {
-  #  enable = true;
-  #  font.name = "TeX Gyre Adventor 10";
-  #  theme = {
-  #    name = "Juno";
-  #    package = pkgs.juno-theme;
-  #  };
-  #  iconTheme = {
-  #    name = "Papirus-Dark";
-  #    package = pkgs.papirus-icon-theme;
-  #  };
-  #  cursorTheme = {
-  #    name = "Bibata-Modern-Classic";
-  #    package = pkgs.bibata-cursors;
-  #  };
-  #  
-  #  #gtk2.extraConfig = {};
+  gtk = {
+    enable = true;
+    font.name = "TeX Gyre Adventor 10";
+    theme = {
+      name = "Juno";
+      package = pkgs.juno-theme;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    cursorTheme = {
+      name = "Bibata-Modern-Classic";
+      package = pkgs.bibata-cursors;
+    };
+    
+    #gtk2.extraConfig = {};
 
-  #  gtk3.extraConfig = { 
-  #    color-scheme = "prefer-dark";
-  #    Settings = ''
-  #      gtk-application-prefer-dark-theme=1
-  #      gtk-cursor-theme-name=Bibata-Modern-Classic
-  #      '';
-  #  };
+    gtk3.extraConfig = { 
+      color-scheme = "prefer-dark";
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+        gtk-cursor-theme-name=Bibata-Modern-Classic
+        '';
+    };
 
-  #  gtk4.extraConfig = {
-  #    color-scheme = "prefer-dark";
-  #    Settings = ''
-  #      gtk-application-prefer-dark-theme=1
-  #      gtk-cursor-theme-name=Bibata-Modern-Classic
-  #      '';
-  #  };
-
-  #};
+    gtk4.extraConfig = {
+      color-scheme = "prefer-dark";
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+        gtk-cursor-theme-name=Bibata-Modern-Classic
+        '';
+    };
+  };
+  
   #gnome outside gnome
-  #dconf = {
-  #  enable = true;
-  #  settings = {
-  #    "org/gnome/desktop/interface" = {
-  #      color-scheme = "prefer-dark";
-  #      theme = "Juno";
-  #    };
-  #  };
-  #};
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        theme = "Juno";
+      };
+    };
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

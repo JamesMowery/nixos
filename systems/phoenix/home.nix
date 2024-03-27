@@ -18,28 +18,25 @@
     tldr
     nvd
     yazi
-    #fish
     starship
     #ollama
     #cudatoolkit
 
-    # Web
+    ## Web
     firefox
-    floorp
 
-    # Utility
+    ## Utility
     nethogs
     openrgb
     nh
     flameshot
-    hyprshot
     distrobox
     #podman
     #jdk17
     #openjdk11
     zulu11
 
-    # Productivity
+    ## Productivity
     libreoffice-qt
     hunspell
     hunspellDicts.en_US-large
@@ -47,7 +44,7 @@
     thunderbird
     logseq
 
-    # Development
+    ## Development
     git
     lazygit
     neofetch
@@ -55,44 +52,45 @@
     vscodium
     nodejs
 
-    # Multimedia
-    yt-dlp
-    ffmpeg
+    ## Multimedia
+    #yt-dlp
+    #ffmpeg
     btop
     mpv
-    handbrake
+    #handbrake
     stremio
-    freetube
+    #freetube
 
-    # Gaming
+    ## Gaming
     lutris
-    heroic
-    bottles
+    #heroic
+    #bottles
     protonup-qt
-    openttd-jgrpp
-    mangohud
-    goverlay
-    #openmw
+    #openttd-jgrpp
+    #mangohud
+    #goverlay
+    ##openmw
     starsector
-    wineWowPackages.stable
-    #wineWowPackages.waylandFull
+    #wineWowPackages.stable
+    wineWowPackages.waylandFull
     winetricks
     
-    # Creative
+    ## Creative
     obs-studio
     gimp
     inkscape
     obsidian
     fluidsynth
     freecad
-    kicad
+    #kicad
 
-    # Social
+    ### Social
     discord
     signal-desktop
     telegram-desktop
 
-    # Wayland / Hyprland
+    ## Wayland / Hyprland
+    #hyprshot
     #hyprpaper
     #dolphin
     #kitty
@@ -100,8 +98,9 @@
     #waybar
     #mako
 
-    # Finance
+    ## Finance
     tradingview
+    ib-tws
 
     # Theme
 

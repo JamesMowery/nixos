@@ -50,7 +50,7 @@
     enable = true; 
     storageDriver = "btrfs";
   };
-  
+
   #virtualisation.docker.rootless = {
   #  enable = true;
   #  setSocketVariable = true;
@@ -130,9 +130,9 @@
   ############################################################
   users.users.james = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "docker" "vboxusers" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "input" "docker" "vboxusers" "plocate" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      #flatpak
+      flatpak
     ];
   };
 
@@ -148,6 +148,13 @@
     useGlobalPkgs = true;
   };
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+    # here, NOT in environment.systemPackages
+    #zulu11
+  ];
+
   ############################################################
   # SYSTEM PACKAGES
   ############################################################
@@ -161,8 +168,10 @@
     i2c-tools
     libgcc
     gcc
+    glibc
     libclang
     clang
+    plocate
     #(import pkgs { config.cudaSupport = true; config.allowUnfree = true; }).ollama
   ];
   

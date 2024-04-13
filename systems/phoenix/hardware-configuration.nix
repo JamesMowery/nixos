@@ -12,19 +12,22 @@
   boot.kernelParams = [ "pcie_port_pm=off" "pcie_aspm.policy=performance" "acpi_enforce_resources=lax" ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
+    #{ device = "/dev/disk/by-uuid/9f490704-1542-4593-b0d3-f295ad8592f4";
+    { device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
       options = [ "subvol=@" "compress=zstd" "space_cache=v2" "noatime" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
+    #{ device = "/dev/disk/by-uuid/9f490704-1542-4593-b0d3-f295ad8592f4";
+    { device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
-      options = [ "subvol=@home"  "compress=zstd" "space_cache=v2" "noatime" ];
+      options = [ "subvol=@home" "compress=zstd" "space_cache=v2" "noatime" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/4e905fe1-b4e6-4ac2-ae86-05e6e065b9da";
+    #{ device = "/dev/disk/by-uuid/9f490704-1542-4593-b0d3-f295ad8592f4";
+    { device = "/dev/disk/by-label/nixos";
       fsType = "btrfs";
       options = [ "subvol=@nix" "compress=zstd" "space_cache=v2" "noatime" ];
     };
@@ -34,7 +37,7 @@
       fsType = "vfat";
     };
 
-  fileSystems."/mnt/games" =
+    fileSystems."/mnt/games" =
     { device = "/dev/disk/by-uuid/6b09080b-4ff2-4655-878b-feb9a5b8e5be";
       fsType = "btrfs";
       options = [ "subvol=@games" "compress=zstd" "space_cache=v2" "noatime" ];
@@ -51,14 +54,14 @@
       fsType = "btrfs";
       options = [ "subvol=@backup" "compress=zstd" "space_cache=v2" "noatime" ];
     };
-  
+
+  swapDevices = [ ];
+
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
     fileSystems = [ "/" ];
   };
-
-  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

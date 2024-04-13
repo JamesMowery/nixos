@@ -9,8 +9,10 @@
 
   services.xserver = {
     enable = true;
+    videoDrivers = [ "nvidia" ];
     xkb.layout = "us";
     xkb.variant = "";
-    excludePackages = [ pkgs.xterm ];
+    libinput.enable = false;
+    #excludePackages = [ pkgs.xterm ];
   };
 }

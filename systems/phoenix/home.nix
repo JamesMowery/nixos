@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 {
   home.username = "james";
@@ -6,88 +6,98 @@
   home.stateVersion = "23.11"; # Value should not be updated
 
   # Install packages into home environment
-  home.packages = with pkgs; [
+  home.packages = [
     # General
-    alacritty 
-    wget
-    unzip
-    killall
-    ripgrep
-    fzf
-    gparted
-    tldr
-    nvd
-    yazi
-    starship
+    pkgs.alacritty
+    pkgs.fish
+    pkgs.neofetch
+
+    # Web
+    #pkgs.firefox
+
+    # AI
     #ollama
     #cudatoolkit
 
-    ## Web
-    firefox
+    # Utility
+    pkgs-unstable.btop
+    pkgs.flameshot
+    pkgs.fzf
+    pkgs.gparted
+    pkgs.killall
+    pkgs.nethogs
+    #nh
+    pkgs.openrgb
+    pkgs.tldr
+    pkgs.nvd
+    pkgs.ripgrep
+    pkgs.starship
+    pkgs.unzip
+    pkgs.yazi
 
-    ## Utility
-    nethogs
-    openrgb
-    nh
-    flameshot
-    distrobox
-    #podman
-    #jdk17
-    #openjdk11
-    zulu11
+    # Productivity
+    pkgs.hunspell
+    pkgs.hunspellDicts.en_US-large
+    pkgs.libreoffice-qt
+    pkgs.logseq
+    pkgs.qalculate-qt
+    pkgs.thunderbird
 
-    ## Productivity
-    libreoffice-qt
-    hunspell
-    hunspellDicts.en_US-large
-    qalculate-qt
-    thunderbird
-    logseq
+    # Development
+    pkgs-unstable.bruno
+    pkgs-unstable.jq
+    pkgs-unstable.lazygit
+    pkgs.nodejs
+    pkgs.tree-sitter
+    pkgs.vscodium
+    pkgs.websocat
+    pkgs.dpkg
 
-    ## Development
-    git
-    lazygit
-    neofetch
-    tree-sitter
-    vscodium
-    nodejs
-
-    ## Multimedia
-    #yt-dlp
-    #ffmpeg
-    btop
-    mpv
-    #handbrake
-    stremio
-    #freetube
-
-    ## Gaming
-    lutris
-    #heroic
-    #bottles
-    protonup-qt
-    #openttd-jgrpp
-    #mangohud
-    #goverlay
-    ##openmw
-    starsector
-    #wineWowPackages.stable
-    wineWowPackages.waylandFull
-    winetricks
+    # Multimedia
+    pkgs.ffmpeg
+    #pkgs.freetube
+    pkgs.handbrake
+    pkgs.mpv
+    pkgs.stremio
+    pkgs-unstable.yt-dlp
     
-    ## Creative
-    obs-studio
-    gimp
-    inkscape
-    obsidian
-    fluidsynth
-    freecad
-    #kicad
+    # Creative
+    pkgs.fluidsynth
+    pkgs-unstable.freecad
+    pkgs-unstable.gimp
+    pkgs-unstable.inkscape
+    #pkgs.kicad
+    pkgs-unstable.obs-studio
+    #pkgs-unstable.obsidian
 
-    ### Social
-    discord
-    signal-desktop
-    telegram-desktop
+    # Gaming
+    pkgs-unstable.goverlay
+    pkgs-unstable.heroic
+    pkgs-unstable.lutris
+    pkgs-unstable.mangohud
+    ##pkgs-unstable.openmw
+    pkgs-unstable.openttd-jgrpp
+    pkgs-unstable.protonup-qt
+    pkgs-unstable.starsector
+
+    # Virtualization / Emulation
+    pkgs-unstable.bottles
+    pkgs-unstable.distrobox
+    #pkgs-unstable.podman
+    pkgs-unstable.winetricks
+    pkgs-unstable.wineWowPackages.stable
+    #pkgs-unstable.wineWowPackages.waylandFull
+
+    # Social
+    pkgs.discord
+    pkgs.signal-desktop
+    pkgs.telegram-desktop
+    pkgs-unstable.vesktop
+
+    # Finance
+    #pkgs.ib-tws
+    pkgs.tradingview
+    #pkgs.jetbrains.jdk
 
     ## Wayland / Hyprland
     #hyprshot
@@ -98,12 +108,6 @@
     #waybar
     #mako
 
-    ## Finance
-    tradingview
-    ib-tws
-
-    # Theme
-
     # Overrides Example
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
@@ -112,6 +116,32 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  programs.firefox = {
+    enable = true;
+    #profiles.default = {
+    #  id = 0;
+    #  name = "default";
+    #  isDefault = true;
+    #  settings = {
+    #    "extensions.formautofill.creditCards.enabled" = false;
+    #    "dom.payments.defaults.saveAddress" = false;
+    #    "extensions.pocket.enabled" = false;
+    #    "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+    #    "layout.css.color-mix.enabled" = true;
+    #    "media.ffmpeg.vaapi.enabled" = true;
+    #    "cookiebanners.ui.desktop.enabled" = true;
+    #    "devtools.command-button-screenshot.enabled" = true;
+    #  };
+    #};
+  };
+
+  programs.git = {
+    enable = true;
+    #package = pkgs.git;
+    userName = "James Mowery";
+    userEmail = "jmowery@gmail.com";
+  };
 
   programs.neovim = {
     enable = true;
@@ -150,40 +180,40 @@
   #};
 
   #Gtk 
-  gtk = {
-    enable = true;
-    font.name = "TeX Gyre Adventor 10";
-    theme = {
-      name = "Juno";
-      package = pkgs.juno-theme;
-    };
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    cursorTheme = {
-      name = "Bibata-Modern-Classic";
-      package = pkgs.bibata-cursors;
-    };
+  # gtk = {
+  #   enable = true;
+  #   font.name = "TeX Gyre Adventor 10";
+  #   theme = {
+  #     name = "Juno";
+  #     package = pkgs.juno-theme;
+  #   };
+  #   iconTheme = {
+  #     name = "Papirus-Dark";
+  #     package = pkgs.papirus-icon-theme;
+  #   };
+  #   cursorTheme = {
+  #     name = "Bibata-Modern-Classic";
+  #     package = pkgs.bibata-cursors;
+  #   };
     
-    #gtk2.extraConfig = {};
+  #   #gtk2.extraConfig = {};
 
-    gtk3.extraConfig = { 
-      color-scheme = "prefer-dark";
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-        gtk-cursor-theme-name=Bibata-Modern-Classic
-        '';
-    };
+  #   gtk3.extraConfig = { 
+  #     color-scheme = "prefer-dark";
+  #     Settings = ''
+  #       gtk-application-prefer-dark-theme=1
+  #       gtk-cursor-theme-name=Bibata-Modern-Classic
+  #       '';
+  #   };
 
-    gtk4.extraConfig = {
-      color-scheme = "prefer-dark";
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-        gtk-cursor-theme-name=Bibata-Modern-Classic
-        '';
-    };
-  };
+  #   gtk4.extraConfig = {
+  #     color-scheme = "prefer-dark";
+  #     Settings = ''
+  #       gtk-application-prefer-dark-theme=1
+  #       gtk-cursor-theme-name=Bibata-Modern-Classic
+  #       '';
+  #   };
+  # };
   
   #gnome outside gnome
   dconf = {

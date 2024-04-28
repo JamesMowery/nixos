@@ -37,11 +37,14 @@
       browser = "firefox";
       terminal = "alacritty";
       editor = "nvim";
+      
+      display = "x11";
       wm = "gnome";
       #wm = "plasma";
-      display = "x11";
-      #wm = "hyprland";
+      #wm = "bspwm";
+
       #display = "wayland";
+      #wm = "hyprland";
     };
   
     system = "x86_64-linux";

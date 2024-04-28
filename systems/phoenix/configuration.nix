@@ -76,7 +76,11 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    #extraPackages = with pkgs; [mangohud];
+    extraPackages = [
+      pkgs-unstable.mangohud
+      pkgs-unstable.vaapiVdpau
+      pkgs-unstable.libvdpau-va-gl
+    ];
     #extraPackages32 = with pkgs; [mangohud];
   };
 
@@ -299,6 +303,10 @@
   programs.fish.enable = true;
   environment.shells = with pkgs; [ fish bash ];
   users.defaultUserShell = pkgs.fish;
+
+  environment.sessionVariables = {
+      FLAKE = "/home/james/.config/nixos";
+  };
 
   ############################################################
   # OTHER

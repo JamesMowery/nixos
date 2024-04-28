@@ -16,8 +16,11 @@
     #pkgs.firefox
 
     # AI
-    #ollama
-    #cudatoolkit
+    #(pkgs-unstable.ollama.override { acceleration = "cuda"; })
+    (pkgs.ollama.override { acceleration = "cuda"; })
+    #pkgs-unstable.ollama
+    #pkgs-unstable.cudaPackages.cudatoolkit
+    #pkgs-unstable.cudaPackages.cudnn
 
     # Utility
     pkgs-unstable.btop
@@ -26,12 +29,14 @@
     pkgs.gparted
     pkgs.killall
     pkgs.nethogs
-    #nh
-    pkgs.openrgb
-    pkgs.tldr
-    pkgs.nvd
+    pkgs.nmap
+    pkgs-unstable.nh
+    pkgs-unstable.openrgb
+    pkgs-unstable.tldr
+    pkgs-unstable.nvd
     pkgs.ripgrep
     pkgs.starship
+    pkgs.unrar
     pkgs.unzip
     pkgs.yazi
 
@@ -39,26 +44,27 @@
     pkgs.hunspell
     pkgs.hunspellDicts.en_US-large
     pkgs.libreoffice-qt
-    pkgs.logseq
+    pkgs-unstable.logseq
     pkgs.qalculate-qt
-    pkgs.thunderbird
+    pkgs-unstable.thunderbird
 
     # Development
     pkgs-unstable.bruno
+    pkgs-unstable.dbeaver
     pkgs-unstable.jq
     pkgs-unstable.lazygit
     pkgs.nodejs
     pkgs.tree-sitter
-    pkgs.vscodium
+    pkgs-unstable.vscodium
     pkgs.websocat
     pkgs.dpkg
 
     # Multimedia
-    pkgs.ffmpeg
+    pkgs-unstable.ffmpeg-full
     #pkgs.freetube
-    pkgs.handbrake
-    pkgs.mpv
-    pkgs.stremio
+    pkgs-unstable.handbrake
+    pkgs-unstable.mpv
+    pkgs-unstable.stremio
     pkgs-unstable.yt-dlp
     
     # Creative
@@ -78,6 +84,7 @@
     ##pkgs-unstable.openmw
     pkgs-unstable.openttd-jgrpp
     pkgs-unstable.protonup-qt
+    pkgs-unstable.retroarch
     pkgs-unstable.starsector
 
     # Virtualization / Emulation
@@ -90,23 +97,23 @@
 
     # Social
     pkgs.discord
-    pkgs.signal-desktop
-    pkgs.telegram-desktop
+    pkgs-unstable.signal-desktop
+    pkgs-unstable.telegram-desktop
     pkgs-unstable.vesktop
 
     # Finance
     #pkgs.ib-tws
-    pkgs.tradingview
+    pkgs-unstable.tradingview
     #pkgs.jetbrains.jdk
 
     ## Wayland / Hyprland
-    #hyprshot
-    #hyprpaper
-    #dolphin
-    #kitty
-    #wofi
-    #waybar
-    #mako
+    pkgs-unstable.hyprshot
+    pkgs-unstable.hyprpaper
+    pkgs-unstable.dolphin
+    pkgs-unstable.kitty
+    pkgs-unstable.wofi
+    pkgs-unstable.waybar
+    pkgs-unstable.mako
 
     # Overrides Example
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
@@ -152,6 +159,38 @@
       #vimPlugins.nvim-treesitter
       pkgs.vimPlugins.nvim-treesitter.withAllGrammars
     ];
+  };
+
+
+  programs.tmux = {
+    enable = true;
+    shortcut = "b";
+    # aggressiveResize = true; -- Disabled to be iTerm-friendly
+    baseIndex = 1;
+    newSession = true;
+    # Stop tmux+escape craziness.
+    escapeTime = 0;
+    # Force tmux to use /tmp for sockets (WSL2 compat)
+    secureSocket = false;
+
+    plugins = with pkgs; [
+      tmuxPlugins.better-mouse-mode
+    ];
+
+    extraConfig = ''
+      # https://old.reddit.com/r/tmux/comments/mesrci/tmux_2_doesnt_seem_to_use_256_colors/
+      set -g default-terminal "xterm-256color"
+      set -ga terminal-overrides ",*256col*:Tc"
+      set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+      set-environment -g COLORTERM "truecolor"
+
+      # Mouse works as expected
+      set-option -g mouse on
+      # easy-to-remember split pane commands
+      bind | split-window -h -c "#{pane_current_path}"
+      bind - split-window -v -c "#{pane_current_path}"
+      bind c new-window -c "#{pane_current_path}"
+    '';
   };
 
   #gtk = {

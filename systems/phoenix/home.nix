@@ -51,6 +51,9 @@
     # Development
     pkgs-unstable.bruno
     pkgs-unstable.dbeaver
+    pkgs-unstable.gh
+    pkgs-unstable.godot_4
+    pkgs-unstable.godot_4-export-templates
     pkgs-unstable.jq
     pkgs-unstable.lazygit
     pkgs.nodejs
@@ -74,7 +77,7 @@
     pkgs-unstable.inkscape
     #pkgs.kicad
     pkgs-unstable.obs-studio
-    #pkgs-unstable.obsidian
+    pkgs-unstable.obsidian
 
     # Gaming
     pkgs-unstable.goverlay
@@ -83,7 +86,8 @@
     pkgs-unstable.mangohud
     ##pkgs-unstable.openmw
     pkgs-unstable.openttd-jgrpp
-    pkgs-unstable.protonup-qt
+    pkgs-unstable.prismlauncher
+    pkgs.protonup-qt
     pkgs-unstable.retroarch
     pkgs-unstable.starsector
 
@@ -96,7 +100,8 @@
     #pkgs-unstable.wineWowPackages.waylandFull
 
     # Social
-    pkgs.discord
+    pkgs-unstable.chatterino2
+    #pkgs.discord
     pkgs-unstable.signal-desktop
     pkgs-unstable.telegram-desktop
     pkgs-unstable.vesktop

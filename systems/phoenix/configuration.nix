@@ -154,6 +154,7 @@
   ############################################################
   environment.systemPackages = with pkgs; [
     binutils
+    bubblewrap
     clang
     docker-compose
     #fish
@@ -190,6 +191,8 @@
   ############################################################
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
+    glibc
+    coreutils
     stdenv.cc.cc
     openssl
     xorg.libXcomposite
@@ -295,6 +298,9 @@
     gtk3
     pkg-config
     pipewire
+
+    # For freespace2
+    icu
   ];
 
   ############################################################
@@ -324,10 +330,19 @@
   ############################################################
   # List services that you want to enable:
   #services.hardware.openrgb.enable = true;
-  #services.flatpak.enable = true;
+  services.flatpak.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+  
+  services = {
+    syncthing = {
+        enable = true;
+        user = "james";
+        dataDir = "/home/james/Documents";    # Default folder for new synced folders
+        configDir = "/home/james/Documents/.config/syncthing";   # Folder for Syncthing's settings and keys
+    };
+  };
 
   ############################################################
   # VERSION

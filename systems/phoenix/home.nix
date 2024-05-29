@@ -30,12 +30,15 @@
     pkgs.killall
     pkgs.nethogs
     pkgs.nmap
+    pkgs-unstable.ncdu
     pkgs-unstable.nh
     pkgs-unstable.openrgb
     pkgs-unstable.tldr
+    pkgs-unstable.motrix
     pkgs-unstable.nvd
     pkgs.ripgrep
     pkgs.starship
+    pkgs-unstable.uget
     pkgs.unrar
     pkgs.unzip
     pkgs.yazi
@@ -50,7 +53,7 @@
 
     # Development
     pkgs-unstable.bruno
-    pkgs-unstable.dbeaver
+    pkgs-unstable.dbeaver-bin
     pkgs-unstable.gh
     pkgs-unstable.godot_4
     pkgs-unstable.godot_4-export-templates

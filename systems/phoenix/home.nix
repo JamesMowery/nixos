@@ -3,7 +3,7 @@
 {
   home.username = "james";
   home.homeDirectory = "/home/james";
-  home.stateVersion = "23.11"; # Value should not be updated
+  home.stateVersion = "24.05"; # Value should not be updated
 
   # Install packages into home environment
   home.packages = [

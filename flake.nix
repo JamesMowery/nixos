@@ -10,6 +10,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #nix-alien.url = "github:thiagokokada/nix-alien";
+    open-webui = {
+      url = "github:shivaraj-bh/ollama-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{
@@ -17,16 +21,17 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
+    open-webui,
     ...
   }:
   let
     # Defined System Settings
     systemSettings = {
       system = "x86_64-linux";	# System Arch
-        hostname = "phoenix";		# Hostname
-        profile = "personal";		# Select a defined profile
-        timezone = "America/Phoenix";	# Timezone
-        locale = "en_US.UTF-8";		# Locale
+      hostname = "phoenix";		# Hostname
+      profile = "personal";		# Select a defined profile
+      timezone = "America/Phoenix";	# Timezone
+      locale = "en_US.UTF-8";		# Locale
     };
     # Defined User Settings
     userSettings = {
@@ -39,8 +44,8 @@
       editor = "nvim";
       
       display = "x11";
-      wm = "gnome";
-      #wm = "plasma";
+      #wm = "gnome";
+      wm = "plasma";
       #wm = "bspwm";
 
       #display = "wayland";
@@ -53,10 +58,12 @@
     # Stable
     pkgs = import nixpkgs {
       inherit system;
+      inherit open-webui;
       config = {
         allowUnfree = true;
         permittedInsecurePackages = [
           "electron-25.9.0"
+          "electron-27.3.11"
         ];
       };
     };
@@ -67,6 +74,7 @@
         allowUnfree = true;
         permittedInsecurePackages = [
           "electron-25.9.0"
+          "electron-27.3.11"
         ];
       };
     };
@@ -80,6 +88,7 @@
           inherit systemSettings;
           inherit userSettings;
           inherit pkgs-unstable;
+          inherit open-webui;
         };
         modules = [
           ./systems/phoenix/configuration.nix
@@ -92,6 +101,7 @@
             	inherit self;
 	            inherit system;
               inherit pkgs-unstable;
+              inherit open-webui;
             };
           }
           #inputs.home-manager.nixosModules.default

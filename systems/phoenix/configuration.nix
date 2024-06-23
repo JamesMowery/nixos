@@ -1,4 +1,4 @@
-{ config, lib, pkgs, pkgs-unstable, inputs, systemSettings, userSettings, ... }:
+{ config, lib, pkgs, pkgs-unstable, inputs, systemSettings, userSettings, open-webui, ... }:
 
 {
   imports =
@@ -176,6 +176,47 @@
     
     #ollama
     #(import pkgs { config.cudaSupport = true; config.allowUnfree = true; }).ollama
+    #open-webui
+
+        # Gaming Emulation
+    (retroarch.override {
+      cores = with libretro; [
+        #NES
+        fceumm
+        mesen
+        # fceux
+        #SNES
+        snes9x
+        #GBOY/COLOR
+        gambatte
+        #GENESIS
+        genesis-plus-gx
+        #32X
+        picodrive
+        #2600
+        stella
+        #5200
+        atari800
+        #7800
+        prosystem
+        #GAMEGEAR
+        smsplus-gx
+        #NINTENDOD DS
+        melonds
+        #NINTENDO 64
+        # mupen64plus-next
+        mupen64plus
+        #GAMEBOY ADVANCE
+        beetle-gba
+        #gpsp
+        #meteor
+        #mgba
+        #vbam
+        #vba-next
+        #GC/Wii
+        dolphin
+      ];
+    })
   ];
 
   # SYSTEM PACKAGES CUSTOMIZED
@@ -241,6 +282,10 @@
     libogg
     libvorbis
     SDL
+    SDL2
+    SDL2_net
+    SDL2_gfx
+    SDL2_sound
     SDL2_image
     glew110
     libidn
@@ -343,6 +388,8 @@
         configDir = "/home/james/Documents/.config/syncthing";   # Folder for Syncthing's settings and keys
     };
   };
+
+  #services.open-webui.enable = true;
 
   ############################################################
   # VERSION

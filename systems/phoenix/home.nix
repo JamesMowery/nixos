@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, ... }:
+{ config, pkgs, pkgs-unstable, open-webui, ... }:
 
 {
   home.username = "james";
@@ -21,18 +21,23 @@
     #pkgs-unstable.ollama
     #pkgs-unstable.cudaPackages.cudatoolkit
     #pkgs-unstable.cudaPackages.cudnn
+    pkgs-unstable.open-webui
 
     # Utility
+    pkgs-unstable.borgbackup
     pkgs-unstable.btop
     pkgs.flameshot
     pkgs.fzf
     pkgs.gparted
     pkgs.killall
+    pkgs-unstable.kopia
     pkgs.nethogs
     pkgs.nmap
+    pkgs-unstable.p7zip
     pkgs-unstable.ncdu
     pkgs-unstable.nh
     pkgs-unstable.openrgb
+    pkgs-unstable.restic
     pkgs-unstable.tldr
     pkgs-unstable.motrix
     pkgs-unstable.nvd
@@ -70,6 +75,7 @@
     #pkgs.freetube
     pkgs-unstable.handbrake
     pkgs-unstable.mpv
+    pkgs-unstable.spotube
     pkgs-unstable.stremio
     pkgs-unstable.yt-dlp
     
@@ -88,11 +94,39 @@
     pkgs-unstable.lutris
     pkgs-unstable.mangohud
     ##pkgs-unstable.openmw
+    # pkgs-unstable.openttd
     pkgs-unstable.openttd-jgrpp
     pkgs-unstable.prismlauncher
     pkgs.protonup-qt
-    pkgs-unstable.retroarch
     pkgs-unstable.starsector
+
+    # # Gaming Emulation
+    # (pkgs-unstable.retroarch.override {
+    #   cores = with libretro; [
+    #     #NES
+    #     fceumm
+    #     mesen
+    #     # fceux
+    #     #SNES
+    #     snes9x
+    #     #GBOY/COLOR
+    #     gambatte
+    #     #GENESIS
+    #     genesis-plus-gx
+    #     #32X
+    #     picodrive
+    #     #2600
+    #     stella
+    #     #5200
+    #     atari800
+    #     #7800
+    #     prosystem
+    #     #GAMEGEAR
+    #     smsplus-gx
+    #     #NINTENDOD DS
+    #     melonds
+    #   ];
+    # })
 
     # Virtualization / Emulation
     pkgs-unstable.bottles
@@ -123,6 +157,8 @@
     pkgs-unstable.waybar
     pkgs-unstable.mako
 
+    # Gnome
+    pkgs-unstable.gnome-extension-manager
     # Overrides Example
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 

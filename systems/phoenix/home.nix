@@ -17,11 +17,11 @@
 
     # AI
     #(pkgs-unstable.ollama.override { acceleration = "cuda"; })
-    (pkgs.ollama.override { acceleration = "cuda"; })
+    #(pkgs.ollama.override { acceleration = "cuda"; })
     #pkgs-unstable.ollama
     #pkgs-unstable.cudaPackages.cudatoolkit
     #pkgs-unstable.cudaPackages.cudnn
-    pkgs-unstable.open-webui
+    #pkgs-unstable.open-webui
 
     # Utility
     pkgs-unstable.borgbackup
@@ -81,7 +81,7 @@
     
     # Creative
     pkgs.fluidsynth
-    pkgs-unstable.freecad
+    #pkgs-unstable.freecad
     pkgs-unstable.gimp
     pkgs-unstable.inkscape
     #pkgs.kicad

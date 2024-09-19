@@ -12,27 +12,27 @@
   boot.kernelParams = [ "pcie_port_pm=off" "pcie_aspm.policy=performance" "acpi_enforce_resources=lax" ];
 
   fileSystems."/" =
-    #{ device = "/dev/disk/by-uuid/9f490704-1542-4593-b0d3-f295ad8592f4";
-    { device = "/dev/disk/by-label/nixos";
+    #{ device = "/dev/disk/by-label/nixos";
+    { device = "/dev/disk/by-uuid/0c796b54-3426-44f1-b23e-74bf3497bea8";
       fsType = "btrfs";
       options = [ "subvol=@" "compress=zstd" "space_cache=v2" "noatime" ];
     };
 
-  fileSystems."/home" =
-    #{ device = "/dev/disk/by-uuid/9f490704-1542-4593-b0d3-f295ad8592f4";
-    { device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=@home" "compress=zstd" "space_cache=v2" "noatime" ];
-    };
+  #fileSystems."/home" =
+    #{ device = "/dev/disk/by-label/nixos";
+    #{ device = "/dev/disk/by-uuid/0c796b54-3426-44f1-b23e-74bf3497bea8";
+    #  fsType = "btrfs";
+    #  options = [ "subvol=@home" "compress=zstd" "space_cache=v2" "noatime" ];
+    #};
 
-  fileSystems."/nix" =
-    #{ device = "/dev/disk/by-uuid/9f490704-1542-4593-b0d3-f295ad8592f4";
-    { device = "/dev/disk/by-label/nixos";
-      fsType = "btrfs";
-      options = [ "subvol=@nix" "compress=zstd" "space_cache=v2" "noatime" ];
-    };
+  #fileSystems."/nix" =
+    #{ device = "/dev/disk/by-label/nixos";
+  #  { device = "/dev/disk/by-uuid/0c796b54-3426-44f1-b23e-74bf3497bea8";
+  #    fsType = "btrfs";
+  #    options = [ "subvol=@nix" "compress=zstd" "space_cache=v2" "noatime" ];
+  #  };
 
-  fileSystems."/boot/efi" =
+  fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/E475-AC97";
       fsType = "vfat";
     };

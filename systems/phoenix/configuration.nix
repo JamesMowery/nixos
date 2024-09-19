@@ -74,8 +74,8 @@
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    #driSupport = true;
+    #driSupport32Bit = true;
     extraPackages = [
       pkgs-unstable.mangohud
       pkgs-unstable.vaapiVdpau
@@ -101,7 +101,8 @@
     # Handle Screen Tearing
     forceFullCompositionPipeline = true;
     # Driver version.
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    #package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   # Enable CUDA
@@ -230,123 +231,123 @@
 
   # BINARY SUPPORT
   ############################################################
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    glibc
-    coreutils
-    stdenv.cc.cc
-    openssl
-    xorg.libXcomposite
-    xorg.libXtst
-    xorg.libXrandr
-    xorg.libXext
-    xorg.libX11
-    xorg.libXfixes
-    libGL
-    libva
-    pipewire
-    xorg.libxcb
-    xorg.libXdamage
-    xorg.libxshmfence
-    xorg.libXxf86vm
-    libelf
-    
-    # Required
-    glib
-    gtk2
-    bzip2
-    
-    # Without these it silently fails
-    xorg.libXinerama
-    xorg.libXcursor
-    xorg.libXrender
-    xorg.libXScrnSaver
-    xorg.libXi
-    xorg.libSM
-    xorg.libICE
-    gnome2.GConf
-    nspr
-    nss
-    cups
-    libcap
-    SDL2
-    libusb1
-    dbus-glib
-    ffmpeg
-    # Only libraries are needed from those two
-    libudev0-shim
-    
-    # Verified games requirements
-    xorg.libXt
-    xorg.libXmu
-    libogg
-    libvorbis
-    SDL
-    SDL2
-    SDL2_net
-    SDL2_gfx
-    SDL2_sound
-    SDL2_image
-    glew110
-    libidn
-    tbb
-    
-    # Other things from runtime
-    flac
-    freeglut
-    libjpeg
-    libpng
-    libpng12
-    libsamplerate
-    libmikmod
-    libtheora
-    libtiff
-    pixman
-    speex
-    SDL_image
-    SDL_ttf
-    SDL_mixer
-    SDL2_ttf
-    SDL2_mixer
-    libappindicator-gtk2
-    libdbusmenu-gtk2
-    libindicator-gtk2
-    libcaca
-    libcanberra
-    libgcrypt
-    libvpx
-    librsvg
-    xorg.libXft
-    libvdpau
-    gnome2.pango
-    cairo
-    atk
-    gdk-pixbuf
-    fontconfig
-    freetype
-    dbus
-    alsaLib
-    expat
-    # Needed for electron
-    libdrm
-    mesa
-    libxkbcommon
+  #programs.nix-ld.enable = true;
+  #programs.nix-ld.libraries = with pkgs; [
+  #  glibc
+  #  coreutils
+  #  stdenv.cc.cc
+  #  openssl
+  #  xorg.libXcomposite
+  #  xorg.libXtst
+  #  xorg.libXrandr
+  #  xorg.libXext
+  #  xorg.libX11
+  #  xorg.libXfixes
+  #  libGL
+  #  libva
+  #  pipewire
+  #  xorg.libxcb
+  #  xorg.libXdamage
+  #  xorg.libxshmfence
+  #  xorg.libXxf86vm
+  #  libelf
+  #  
+  #  # Required
+  #  glib
+  #  gtk2
+  #  bzip2
+  #  
+  #  # Without these it silently fails
+  #  xorg.libXinerama
+  #  xorg.libXcursor
+  #  xorg.libXrender
+  #  xorg.libXScrnSaver
+  #  xorg.libXi
+  #  xorg.libSM
+  #  xorg.libICE
+  #  gnome2.GConf
+  #  nspr
+  #  nss
+  #  cups
+  #  libcap
+  #  SDL2
+  #  libusb1
+  #  dbus-glib
+  #  ffmpeg
+  #  # Only libraries are needed from those two
+  #  libudev0-shim
+  #  
+  #  # Verified games requirements
+  #  xorg.libXt
+  #  xorg.libXmu
+  #  libogg
+  #  libvorbis
+  #  SDL
+  #  SDL2
+  #  SDL2_net
+  #  SDL2_gfx
+  #  SDL2_sound
+  #  SDL2_image
+  #  glew110
+  #  libidn
+  #  tbb
+  #  
+  #  # Other things from runtime
+  #  flac
+  #  freeglut
+  #  libjpeg
+  #  libpng
+  #  libpng12
+  #  libsamplerate
+  #  libmikmod
+  #  libtheora
+  #  libtiff
+  #  pixman
+  #  speex
+  #  SDL_image
+  #  SDL_ttf
+  #  SDL_mixer
+  #  SDL2_ttf
+  #  SDL2_mixer
+  #  libappindicator-gtk2
+  #  libdbusmenu-gtk2
+  #  libindicator-gtk2
+  #  libcaca
+  #  libcanberra
+  #  libgcrypt
+  #  libvpx
+  #  librsvg
+  #  xorg.libXft
+  #  libvdpau
+  #  gnome2.pango
+  #  cairo
+  #  atk
+  #  gdk-pixbuf
+  #  fontconfig
+  #  freetype
+  #  dbus
+  #  alsaLib
+  #  expat
+  #  # Needed for electron
+  #  libdrm
+  #  mesa
+  #  libxkbcommon
 
-    # For TastyTrade
-    zlib
+  #  # For TastyTrade
+  #  zlib
 
-    # For TOS
-    zulu11
-    #jdk11
-    
-    # For TWS
-    gtk3
-    pkg-config
-    pipewire
+  #  # For TOS
+  #  zulu11
+  #  #jdk11
+  #  
+  #  # For TWS
+  #  gtk3
+  #  pkg-config
+  #  pipewire
 
-    # For freespace2
-    icu
-  ];
+  #  # For freespace2
+  #  icu
+  #];
 
   ############################################################
   # DEFAULTS
